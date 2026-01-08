@@ -30,12 +30,13 @@ def fetch_transcript(video_id):
         print(f"Fetching transcript for video ID: {video_id}...")
         transcript = ytt_api.fetch(video_id)
         
-        # Print the first few lines of the transcript to verify
-        print("\nTranscript fetched successfully! First 5 entries:")
-        for entry in transcript[:5]:
-            print(entry)
+        # Combine all text parts into a single string
+        full_text = " ".join([entry.text for entry in transcript])
+        
+        print("\nFull Transcript:")
+        print(full_text)
             
-        return transcript
+        return full_text
 
     except Exception as e:
         print(f"An error occurred: {e}")
