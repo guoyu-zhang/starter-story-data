@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcript: {{ video.title }}</title>
+    <style>
+        body { font-family: monospace; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; white-space: pre-wrap; }
+        h1 { font-family: sans-serif; }
+        .meta { color: #666; font-family: sans-serif; margin-bottom: 20px; }
+        .back-link { font-family: sans-serif; display: inline-block; margin-bottom: 20px; color: #007bff; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}" class="back-link">&larr; Back to List</a>
+    <h1>{{ video.title }}</h1>
+    <div class="meta">Video ID: {{ video.id }} | Date: {{ video.date }}</div>
+    <hr>
+    <div>{{ video.transcript }}</div>
+</body>
+</html>

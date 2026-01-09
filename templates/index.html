@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Summaries & Transcripts</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 20px; line-height: 1.4; color: #333; font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        th, td { border: 1px solid #ddd; padding: 10px; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #007bff; color: white; text-align: left; position: sticky; top: 0; font-size: 13px; }
+        
+        /* Column Widths */
+        th:nth-child(1) { width: 10%; } /* Title */
+        th:nth-child(2) { width: 5%; }  /* Date */
+        th:nth-child(3) { width: 10%; } /* Subject */
+        th:nth-child(4) { width: 12%; } /* Built */
+        th:nth-child(5) { width: 10%; } /* Strategy */
+        th:nth-child(6) { width: 18%; } /* Playbook */
+        th:nth-child(7) { width: 10%; } /* Stack */
+        th:nth-child(8) { width: 15%; } /* Advice */
+        th:nth-child(9) { width: 5%; }  /* Transcript */
+        
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f1f1f1; }
+        
+        .summary-content {
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+        .view-btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            text-align: center;
+        }
+        .view-btn:hover {
+            background-color: #0056b3;
+        }
+        h1 { text-align: center; color: #333; }
+        
+        /* Markdown content styling */
+        .summary-content p { margin: 0 0 10px 0; }
+        .summary-content ul, .summary-content ol { padding-left: 20px; margin: 0 0 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Video Summaries & Transcripts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Video Title</th>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Built</th>
+                <th>Strategy</th>
+                <th>Playbook</th>
+                <th>Stack</th>
+                <th>Advice</th>
+                <th>Transcript</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for video in videos %}
+            <tr>
+                <td><strong>{{ video.title }}</strong></td>
+                <td>{{ video.date }}</td>
+                <td><div class="summary-content">{{ video.summary.subject | safe }}</div></td>
+                <td><div class="summary-content">{{ video.summary.built | safe }}</div></td>
+                <td><div class="summary-content">{{ video.summary.strategy | safe }}</div></td>
+                <td><div class="summary-content">{{ video.summary.playbook | safe }}</div></td>
+                <td><div class="summary-content">{{ video.summary.stack | safe }}</div></td>
+                <td><div class="summary-content">{{ video.summary.advice | safe }}</div></td>
+                <td>
+                    <a href="{{ url_for('transcript', video_id=video.id) }}" target="_blank" class="view-btn">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
