@@ -2,3 +2,4 @@ venv
 summaries
 transcripts
 fetched_videos.json
+.env
